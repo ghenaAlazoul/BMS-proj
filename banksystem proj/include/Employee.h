@@ -1,16 +1,42 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
-
-
-class Employee
+#include <iostream>
+#include <string>
+#include "Person.h"
+#include "Admin.h"
+#include "Customer.h"
+#include <list>
+using namespace std;
+class Employee:public Person
 {
+    protected:
+
     public:
         Employee();
         virtual ~Employee();
 
-    protected:
+void setID(int id ) {
 
-    private:
+		this ->ID = id;
+}
+
+	void setName(string n) {
+
+
+		this ->name =n ;
+	}
+	void setPassword(string pw) {
+
+		this -> Password=pw ;
+	}
+	void setBalance(double b) {
+
+		this ->Balance = b;
+	}
+
+
+
 };
+
 
 #endif // EMPLOYEE_H

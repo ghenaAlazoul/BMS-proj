@@ -1,16 +1,27 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-
-class Admin
+#include <iostream>
+#include <string>
+#include "Person.h"
+#include "Employee.h"
+#include "Customer.h"
+#include <list>
+using namespace std;
+class Admin:public Person
 {
-    public:
+
+private:
+
+public:
         Admin();
         virtual ~Admin();
 
-    protected:
 
-    private:
+
 };
 
+
 #endif // ADMIN_H
+
+
