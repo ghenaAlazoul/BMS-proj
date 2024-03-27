@@ -1,0 +1,74 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+struct Employee {
+    int id;
+    std::string name;
+    std::string role;
+};
+
+class Admin {
+    std::vector<Employee> employees;
+
+public:
+    
+    void addEmployee(int id, const std::string& name, const std::string& role) {
+        employees.emplace_back(Employee{ id, name, role });
+    }
+
+    
+    void editEmployee(int id, const std::string& newName, const std::string& newRole) {
+        auto it = std::find_if(employees.begin(), employees.end(),
+            [id](const Employee& emp) { return emp.id == id; });
+
+        if (it != employees.end()) {
+            it->name = newName;
+            it->role = newRole;
+        }
+    }
+
+   
+    const Employee* searchEmployee(int id) {
+        auto it = std::find_if(employees.begin(), employees.end(),
+            [id](const Employee& emp) { return emp.id == id; });
+
+        return (it != employees.end()) ? &(*it) : nullptr;
+    }
+
+  
+    void listAllEmployees() {
+        for (const auto& emp : employees) {
+            std::cout << "ID: " << emp.id << ", Name: " << emp.name
+                << ", Role: " << emp.role << "\n";
+        }
+    }
+};
+
+int main() {
+    Admin admin;
+
+    
+    admin.addEmployee(1, "Employee1", "Software Engineer");
+    admin.addEmployee(2, "Employee2", "Manager");
+    admin.addEmployee(3, "Employee3", "Database Administrator");
+
+    admin.listAllEmployees();
+    std::cout << "\n";
+
+    admin.editEmployee(1, "Employee1-updated", "Senior Software Engineer");
+    admin.listAllEmployees();
+    std::cout << "\n";
+
+    const Employee* employee = admin.searchEmployee(3);
+    if (employee) {
+        std::cout << "ID: " << employee->id << ", Name: " << employee->name
+            << ", Role: " << employee->role << "\n";
+    }
+    else {
+        std::cout << "Employee not found.\n";
+    }
+
+    return 0;
+}
